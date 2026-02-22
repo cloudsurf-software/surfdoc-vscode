@@ -1,0 +1,154 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "SurfDoc",
+  "scopeName": "text.html.markdown.surf",
+  "patterns": [
+    { "include": "#frontmatter" },
+    { "include": "#block-directive" },
+    { "include": "#leaf-directive" },
+    { "include": "#inline-extension" },
+    { "include": "text.html.markdown" }
+  ],
+  "repository": {
+    "frontmatter": {
+      "name": "meta.embedded.block.frontmatter.surf",
+      "begin": "\\A(---)\\s*$",
+      "end": "^(---)\\s*$",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.frontmatter.begin.surf" }
+      },
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.frontmatter.end.surf" }
+      },
+      "patterns": [
+        { "include": "source.yaml" }
+      ]
+    },
+    "block-directive": {
+      "patterns": [
+        { "include": "#block-directive-open" },
+        { "include": "#block-directive-close" }
+      ]
+    },
+    "block-directive-open": {
+      "name": "meta.directive.block.surf",
+      "match": "^(:{2,})(callout|decision|summary|quote|figure|code|tasks|data|metric|stats|timeline|chart|columns|column|tabs|tab|details|section|turn|alternatives|related|embed|footnote|progress|divider|hero|cta|nav|page|site|features|steps|comparison|pricing-table|faq|testimonial|footer|form|gallery|hero-image|style|before-after|pipeline|product-card|logo|logo-cloud|toc|output)(\\[.*\\])?\\s*$",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.begin.surf" },
+        "2": {
+          "patterns": [
+            { "include": "#block-name-core" },
+            { "include": "#block-name-data" },
+            { "include": "#block-name-container" },
+            { "include": "#block-name-web" },
+            { "include": "#block-name-other" }
+          ]
+        },
+        "3": {
+          "patterns": [
+            { "include": "#attributes" }
+          ]
+        }
+      }
+    },
+    "block-directive-close": {
+      "match": "^(:{2,})\\s*$",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.end.surf" }
+      }
+    },
+    "leaf-directive": {
+      "name": "meta.directive.leaf.surf",
+      "match": "^(:{2,})(callout|decision|summary|quote|figure|code|tasks|data|metric|stats|timeline|chart|columns|column|tabs|tab|details|section|turn|alternatives|related|embed|footnote|progress|divider|hero|cta|nav|page|site|features|steps|comparison|pricing-table|faq|testimonial|footer|form|gallery|hero-image|style|before-after|pipeline|product-card|logo|logo-cloud|toc|output)(\\[.*?\\])(?:(\\{)(.*)(\\}))?\\s*$",
+      "captures": {
+        "1": { "name": "punctuation.definition.directive.begin.surf" },
+        "2": {
+          "patterns": [
+            { "include": "#block-name-core" },
+            { "include": "#block-name-data" },
+            { "include": "#block-name-container" },
+            { "include": "#block-name-web" },
+            { "include": "#block-name-other" }
+          ]
+        },
+        "3": {
+          "patterns": [
+            { "include": "#attributes" }
+          ]
+        },
+        "4": { "name": "punctuation.definition.content.begin.surf" },
+        "5": { "name": "string.unquoted.content.surf" },
+        "6": { "name": "punctuation.definition.content.end.surf" }
+      }
+    },
+    "inline-extension": {
+      "name": "markup.inline.extension.surf",
+      "match": "(?<=\\s|^)(:)(evidence|status|ref|cite|term|abbr|mark|date|tag)(\\[)(.*?)(\\])",
+      "captures": {
+        "1": { "name": "punctuation.definition.inline.begin.surf" },
+        "2": { "name": "entity.name.type.inline.surf" },
+        "3": { "name": "punctuation.definition.attributes.begin.surf" },
+        "4": { "name": "string.unquoted.inline-content.surf" },
+        "5": { "name": "punctuation.definition.attributes.end.surf" }
+      }
+    },
+    "block-name-core": {
+      "match": "\\b(callout|decision|summary|quote|figure|code|tasks)\\b",
+      "name": "entity.name.type.directive.core.surf"
+    },
+    "block-name-data": {
+      "match": "\\b(data|metric|stats|timeline|chart)\\b",
+      "name": "entity.name.type.directive.data.surf"
+    },
+    "block-name-container": {
+      "match": "\\b(columns|column|tabs|tab|details|section)\\b",
+      "name": "entity.name.type.directive.container.surf"
+    },
+    "block-name-web": {
+      "match": "\\b(hero|cta|nav|page|site|features|steps|comparison|pricing-table|faq|testimonial|footer|form|gallery|embed|hero-image|style|before-after|pipeline|product-card|logo|logo-cloud|toc|divider|output)\\b",
+      "name": "entity.name.type.directive.web.surf"
+    },
+    "block-name-other": {
+      "match": "\\b(turn|alternatives|related|footnote|progress)\\b",
+      "name": "entity.name.type.directive.other.surf"
+    },
+    "attributes": {
+      "name": "meta.attributes.surf",
+      "begin": "\\[",
+      "end": "\\]",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.attributes.begin.surf" }
+      },
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.attributes.end.surf" }
+      },
+      "patterns": [
+        { "include": "#attribute-key-value-quoted" },
+        { "include": "#attribute-key-value" },
+        { "include": "#attribute-flag" }
+      ]
+    },
+    "attribute-key-value-quoted": {
+      "match": "([\\w-]+)(=)(\"[^\"]*\")",
+      "captures": {
+        "1": { "name": "entity.other.attribute-name.surf" },
+        "2": { "name": "punctuation.separator.key-value.surf" },
+        "3": { "name": "string.quoted.double.surf" }
+      }
+    },
+    "attribute-key-value": {
+      "match": "([\\w-]+)(=)([^\\s\\]\"]+)",
+      "captures": {
+        "1": { "name": "entity.other.attribute-name.surf" },
+        "2": { "name": "punctuation.separator.key-value.surf" },
+        "3": { "name": "constant.other.attribute-value.surf" }
+      }
+    },
+    "attribute-flag": {
+      "match": "(?<=\\[|\\s)([\\w-]+)(?=\\s|\\])",
+      "captures": {
+        "1": { "name": "constant.language.flag.surf" }
+      }
+    }
+  }
+}

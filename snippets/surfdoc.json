@@ -1,0 +1,558 @@
+{
+  "SurfDoc Front Matter": {
+    "prefix": ["surfdoc", "front", "frontmatter"],
+    "body": [
+      "---",
+      "title: \"${1:Document Title}\"",
+      "type: ${2|doc,guide,plan,agent,conversation,preference|}",
+      "version: 1",
+      "created: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}",
+      "author: \"${3:K. Brady Davis}\"",
+      "status: ${4|draft,active,closed,archived|}",
+      "tags: [${5:}]",
+      "---",
+      "",
+      "# ${1}",
+      "",
+      "$0"
+    ],
+    "description": "SurfDoc YAML front matter template"
+  },
+  "Callout Block": {
+    "prefix": ["::callout", "callout"],
+    "body": [
+      "::callout[type=${1|info,warning,error,success,tip,note|} title=\"${2:Title}\"]",
+      "${3:Content}",
+      "::",
+      "$0"
+    ],
+    "description": "Callout block — styled info/warning/error box"
+  },
+  "Decision Block": {
+    "prefix": ["::decision", "decision"],
+    "body": [
+      "::decision[status=${1|open,closed,revisiting|} date=${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}]",
+      "**${2:Decision}** — ${3:Rationale}",
+      "::",
+      "$0"
+    ],
+    "description": "Decision record block"
+  },
+  "Summary Block": {
+    "prefix": ["::summary", "summary"],
+    "body": [
+      "::summary",
+      "${1:Brief summary for AI context loading.}",
+      "::",
+      "$0"
+    ],
+    "description": "Token-efficient summary block"
+  },
+  "Data Block": {
+    "prefix": ["::data", "data"],
+    "body": [
+      "::data[format=${1|yaml,json,csv,toml|}]",
+      "${2:key: value}",
+      "::",
+      "$0"
+    ],
+    "description": "Structured data block (YAML, JSON, CSV, TOML)"
+  },
+  "Metric Leaf": {
+    "prefix": ["::metric", "metric"],
+    "body": [
+      "::metric[label=\"${1:Label}\" value=\"${2:Value}\" ${3|trend=up,trend=down,trend=flat|}]",
+      "$0"
+    ],
+    "description": "Metric leaf directive — single KPI"
+  },
+  "Stats Block": {
+    "prefix": ["::stats", "stats"],
+    "body": [
+      "::stats",
+      "::metric[label=\"${1:Metric 1}\" value=\"${2:Value}\"]",
+      "::metric[label=\"${3:Metric 2}\" value=\"${4:Value}\"]",
+      "::",
+      "$0"
+    ],
+    "description": "Stats container with metrics"
+  },
+  "Figure Leaf": {
+    "prefix": ["::figure", "figure"],
+    "body": [
+      "::figure[src=\"${1:path/to/image.png}\" alt=\"${2:Description}\" caption=\"${3:Caption}\"]",
+      "$0"
+    ],
+    "description": "Figure leaf directive — image with caption"
+  },
+  "Quote Block": {
+    "prefix": ["::quote", "quote"],
+    "body": [
+      "::quote[author=\"${1:Author}\" source=\"${2:Source}\"]",
+      "${3:Quote text}",
+      "::",
+      "$0"
+    ],
+    "description": "Attributed quote block"
+  },
+  "Code Block": {
+    "prefix": ["::code", "codeblock"],
+    "body": [
+      "::code[lang=${1:rust} title=\"${2:Example}\"]",
+      "${3:// code here}",
+      "::",
+      "$0"
+    ],
+    "description": "Code block with language and title"
+  },
+  "Tasks Block": {
+    "prefix": ["::tasks", "tasks"],
+    "body": [
+      "::tasks",
+      "- [ ] ${1:Task 1}",
+      "- [ ] ${2:Task 2}",
+      "- [ ] ${3:Task 3}",
+      "::",
+      "$0"
+    ],
+    "description": "Task list block"
+  },
+  "Timeline Block": {
+    "prefix": ["::timeline", "timeline"],
+    "body": [
+      "::timeline",
+      "- **${1:Date}**: ${2:Event}",
+      "- **${3:Date}**: ${4:Event}",
+      "::",
+      "$0"
+    ],
+    "description": "Timeline block"
+  },
+  "Chart Block": {
+    "prefix": ["::chart", "chart"],
+    "body": [
+      "::chart[type=${1|bar,line,pie,scatter|}]",
+      "::data[format=csv]",
+      "${2:label,value}",
+      "::",
+      "::",
+      "$0"
+    ],
+    "description": "Chart visualization block"
+  },
+  "Columns Layout": {
+    "prefix": ["::columns", "columns"],
+    "body": [
+      "::columns[count=${1:2}]",
+      "",
+      ":::column",
+      "${2:Left column content}",
+      ":::",
+      "",
+      ":::column",
+      "${3:Right column content}",
+      ":::",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Multi-column layout with nested columns"
+  },
+  "Tabs Container": {
+    "prefix": ["::tabs", "tabs"],
+    "body": [
+      "::tabs",
+      "",
+      ":::tab[label=\"${1:Tab 1}\"]",
+      "${2:First tab content}",
+      ":::",
+      "",
+      ":::tab[label=\"${3:Tab 2}\"]",
+      "${4:Second tab content}",
+      ":::",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Tabbed content container"
+  },
+  "Details Block": {
+    "prefix": ["::details", "details"],
+    "body": [
+      "::details[title=\"${1:Click to expand}\"]",
+      "${2:Hidden content}",
+      "::",
+      "$0"
+    ],
+    "description": "Collapsible details/accordion block"
+  },
+  "Section Block": {
+    "prefix": ["::section", "section"],
+    "body": [
+      "::section[headline=\"${1:Section Title}\"]",
+      "${2:Section content}",
+      "::",
+      "$0"
+    ],
+    "description": "Named section block"
+  },
+  "Hero Block": {
+    "prefix": ["::hero", "hero"],
+    "body": [
+      "::hero",
+      "# ${1:Headline}",
+      "",
+      "${2:Subtitle text}",
+      "",
+      "::cta[label=\"${3:Get Started}\" href=\"${4:/signup}\" primary]",
+      "::",
+      "$0"
+    ],
+    "description": "Hero section for landing pages"
+  },
+  "CTA Leaf": {
+    "prefix": ["::cta", "cta"],
+    "body": [
+      "::cta[label=\"${1:Button Text}\" href=\"${2:/path}\" ${3:primary}]",
+      "$0"
+    ],
+    "description": "Call-to-action button"
+  },
+  "Nav Block": {
+    "prefix": ["::nav", "nav"],
+    "body": [
+      "::nav[brand=\"${1:Brand Name}\"]",
+      "- [${2:Home}](${3:/})",
+      "- [${4:About}](${5:/about})",
+      "::",
+      "$0"
+    ],
+    "description": "Navigation bar block"
+  },
+  "Page Block": {
+    "prefix": ["::page", "page"],
+    "body": [
+      "::page[route=${1:/} layout=${2|hero,docs,blog,plain|}]",
+      "",
+      "${3:Page content}",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Page block with route and layout"
+  },
+  "Site Block": {
+    "prefix": ["::site", "site"],
+    "body": [
+      "::site[domain=${1:example.com} name=\"${2:Site Name}\"]",
+      "",
+      "${3:Site content with ::page blocks}",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Site container — wraps pages for web generation"
+  },
+  "Features Block": {
+    "prefix": ["::features", "features"],
+    "body": [
+      "::features[headline=\"${1:Features}\"]",
+      "",
+      "### ${2:Feature 1}",
+      "${3:Description}",
+      "",
+      "### ${4:Feature 2}",
+      "${5:Description}",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Feature grid block"
+  },
+  "Steps Block": {
+    "prefix": ["::steps", "steps"],
+    "body": [
+      "::steps[headline=\"${1:How It Works}\"]",
+      "1. **${2:Step 1}** — ${3:Description}",
+      "2. **${4:Step 2}** — ${5:Description}",
+      "3. **${6:Step 3}** — ${7:Description}",
+      "::",
+      "$0"
+    ],
+    "description": "Numbered steps block"
+  },
+  "Comparison Block": {
+    "prefix": ["::comparison", "comparison"],
+    "body": [
+      "::comparison[headline=\"${1:Comparison}\"]",
+      "",
+      "| Feature | ${2:Us} | ${3:Them} |",
+      "|---------|-----|------|",
+      "| ${4:Feature 1} | ${5:Yes} | ${6:No} |",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Comparison table block"
+  },
+  "Pricing Table Block": {
+    "prefix": ["::pricing-table", "pricing"],
+    "body": [
+      "::pricing-table",
+      "",
+      ":::column",
+      "### ${1:Free}",
+      "**\\$${2:0}**/mo",
+      "- ${3:Feature 1}",
+      "::cta[label=\"Get Started\" href=\"${4:/signup}\"]",
+      ":::",
+      "",
+      ":::column",
+      "### ${5:Pro}",
+      "**\\$${6:12}**/mo",
+      "- ${7:Everything in Free}",
+      "- ${8:Pro feature}",
+      "::cta[label=\"Upgrade\" href=\"${9:/upgrade}\" primary]",
+      ":::",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Pricing table with plan columns"
+  },
+  "FAQ Block": {
+    "prefix": ["::faq", "faq"],
+    "body": [
+      "::faq",
+      "",
+      ":::details[title=\"${1:Question 1?}\"]",
+      "${2:Answer 1}",
+      ":::",
+      "",
+      ":::details[title=\"${3:Question 2?}\"]",
+      "${4:Answer 2}",
+      ":::",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "FAQ accordion block"
+  },
+  "Testimonial Block": {
+    "prefix": ["::testimonial", "testimonial"],
+    "body": [
+      "::testimonial[author=\"${1:Name}\" role=\"${2:Role}\" company=\"${3:Company}\"]",
+      "${4:Testimonial text}",
+      "::",
+      "$0"
+    ],
+    "description": "Customer testimonial block"
+  },
+  "Footer Block": {
+    "prefix": ["::footer", "footer"],
+    "body": [
+      "::footer",
+      "${1:Footer content}",
+      "::",
+      "$0"
+    ],
+    "description": "Page footer block"
+  },
+  "Form Block": {
+    "prefix": ["::form", "form"],
+    "body": [
+      "::form[action=\"${1:/api/submit}\" method=\"${2|post,get|}\"]",
+      "${3:Form fields}",
+      "::",
+      "$0"
+    ],
+    "description": "Form block"
+  },
+  "Gallery Block": {
+    "prefix": ["::gallery", "gallery"],
+    "body": [
+      "::gallery",
+      "::figure[src=\"${1:image1.png}\" alt=\"${2:Image 1}\"]",
+      "::figure[src=\"${3:image2.png}\" alt=\"${4:Image 2}\"]",
+      "::",
+      "$0"
+    ],
+    "description": "Image gallery block"
+  },
+  "Embed Leaf": {
+    "prefix": ["::embed", "embed"],
+    "body": [
+      "::embed[src=\"${1:path/to/file.surf}\" ${2|section=\"\",mode=preview,lines=\"1-10\"|}]",
+      "$0"
+    ],
+    "description": "Embed content from another file"
+  },
+  "Hero Image Leaf": {
+    "prefix": ["::hero-image", "heroimage"],
+    "body": [
+      "::hero-image[src=\"${1:assets/hero.png}\" alt=\"${2:Hero image}\"]",
+      "$0"
+    ],
+    "description": "Hero image leaf directive"
+  },
+  "Style Block": {
+    "prefix": ["::style", "style"],
+    "body": [
+      "::style",
+      "accent: ${1:#2563EB}",
+      "font: ${2:Inter}",
+      "radius: ${3:8px}",
+      "::",
+      "$0"
+    ],
+    "description": "Style overrides block (theme customization)"
+  },
+  "Before-After Block": {
+    "prefix": ["::before-after", "beforeafter"],
+    "body": [
+      "::before-after",
+      "",
+      ":::column[label=\"Before\"]",
+      "${1:Before content}",
+      ":::",
+      "",
+      ":::column[label=\"After\"]",
+      "${2:After content}",
+      ":::",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Before/after comparison block"
+  },
+  "Pipeline Block": {
+    "prefix": ["::pipeline", "pipeline"],
+    "body": [
+      "::pipeline[headline=\"${1:Pipeline}\"]",
+      "1. **${2:Input}** → ${3:Description}",
+      "2. **${4:Process}** → ${5:Description}",
+      "3. **${6:Output}** → ${7:Description}",
+      "::",
+      "$0"
+    ],
+    "description": "Pipeline/flow visualization block"
+  },
+  "Product Card Block": {
+    "prefix": ["::product-card", "productcard"],
+    "body": [
+      "::product-card[name=\"${1:Product}\" href=\"${2:/product}\"]",
+      "${3:Product description}",
+      "::cta[label=\"Learn More\" href=\"${2}\"]",
+      "::",
+      "$0"
+    ],
+    "description": "Product card block"
+  },
+  "Logo Leaf": {
+    "prefix": ["::logo", "logo"],
+    "body": [
+      "::logo[src=\"${1:logo.png}\" alt=\"${2:Logo}\" href=\"${3:/}\"]",
+      "$0"
+    ],
+    "description": "Logo leaf directive"
+  },
+  "TOC Block": {
+    "prefix": ["::toc", "toc"],
+    "body": [
+      "::toc[depth=${1|2,3,4|}]",
+      "$0"
+    ],
+    "description": "Auto-generated table of contents"
+  },
+  "Divider Leaf": {
+    "prefix": ["::divider", "divider"],
+    "body": [
+      "::divider",
+      "$0"
+    ],
+    "description": "Visual section divider"
+  },
+  "Turn Block": {
+    "prefix": ["::turn", "turn"],
+    "body": [
+      "::turn[participant=${1|user,assistant,system|} timestamp=${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}]",
+      "${2:Message content}",
+      "::",
+      "$0"
+    ],
+    "description": "Conversation turn block"
+  },
+  "Alternatives Block": {
+    "prefix": ["::alternatives", "alternatives"],
+    "body": [
+      "::alternatives",
+      "",
+      "### Option A: ${1:Name}",
+      "${2:Description}",
+      "",
+      "### Option B: ${3:Name}",
+      "${4:Description}",
+      "",
+      "::",
+      "$0"
+    ],
+    "description": "Decision alternatives block"
+  },
+  "Related Leaf": {
+    "prefix": ["::related", "related"],
+    "body": [
+      "::related[path=\"${1:path/to/doc.surf}\" relationship=${2|references,produces,consumes,supersedes|}]",
+      "$0"
+    ],
+    "description": "Cross-reference to related document"
+  },
+  "Footnote Block": {
+    "prefix": ["::footnote", "footnote"],
+    "body": [
+      "::footnote[id=${1:1}]",
+      "${2:Footnote text}",
+      "::",
+      "$0"
+    ],
+    "description": "Footnote block"
+  },
+  "Progress Block": {
+    "prefix": ["::progress", "progress"],
+    "body": [
+      "::progress[value=${1:50} max=${2:100} label=\"${3:Progress}\"]",
+      "$0"
+    ],
+    "description": "Progress indicator"
+  },
+  "Output Block": {
+    "prefix": ["::output", "output"],
+    "body": [
+      "::output[lang=${1:text}]",
+      "${2:Output content}",
+      "::",
+      "$0"
+    ],
+    "description": "Command/code output block"
+  },
+  "Inline Evidence": {
+    "prefix": [":evidence"],
+    "body": [
+      ":evidence[${1:claim with source}]$0"
+    ],
+    "description": "Inline evidence extension"
+  },
+  "Inline Status": {
+    "prefix": [":status"],
+    "body": [
+      ":status[${1|done,in-progress,blocked,planned|}]$0"
+    ],
+    "description": "Inline status badge"
+  },
+  "Inline Reference": {
+    "prefix": [":ref"],
+    "body": [
+      ":ref[${1:path/to/doc.surf}]$0"
+    ],
+    "description": "Inline document reference"
+  }
+}

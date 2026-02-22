@@ -1,0 +1,229 @@
+---
+title: "SurfDoc Extension Test"
+type: doc
+version: 1
+created: 2026-02-22
+author: "K. Brady Davis"
+status: active
+tags: [test, surfdoc, vscode]
+---
+
+# SurfDoc Extension Test
+
+This file exercises all major syntax features for visual verification.
+
+## Core Blocks
+
+::callout[type=info title="Welcome"]
+This is an **info callout** with markdown inside.
+It should highlight the `::callout` opener, the attributes, and the `::` closer.
+::
+
+::callout[type=warning]
+A warning without a custom title.
+::
+
+::decision[status=closed date=2026-02-22 owner="Brady"]
+**Rust for everything** — one language across server, CLI, parser, browser, mobile core.
+::
+
+::summary
+This document tests syntax highlighting for the SurfDoc VS Code extension.
+All 37+ block types, front matter, attributes, nesting, and inline extensions.
+::
+
+## Data Blocks
+
+::data[format=yaml]
+revenue:
+  mrr: 12
+  arr: 144
+  currency: USD
+customers:
+  total: 4
+  paying: 1
+::
+
+::metric[label="MRR" value="$12" trend=up]
+
+::stats
+::metric[label="Users" value="13"]
+::metric[label="Sites" value="8"]
+::metric[label="Tests" value="614"]
+::
+
+## Container Blocks
+
+::columns[count=2]
+
+:::column
+### Left Column
+Content in the left column with **bold** and *italic*.
+:::
+
+:::column
+### Right Column
+Content in the right column with `inline code`.
+:::
+
+::
+
+::tabs
+
+:::tab[label="Rust"]
+```rust
+fn main() {
+    println!("Hello from SurfDoc!");
+}
+```
+:::
+
+:::tab[label="TypeScript"]
+```typescript
+const hello = () => console.log("Hello from SurfDoc!");
+```
+:::
+
+::
+
+::details[title="Click to expand"]
+Hidden content that appears when expanded.
+
+- Item one
+- Item two
+- Item three
+::
+
+## Web / Landing Blocks
+
+::hero
+# Make Anyone a Developer
+From their phone. No code, no deploy, no App Store.
+
+::cta[label="Get Started" href="/signup" primary]
+::cta[label="Learn More" href="/docs"]
+::
+
+::section[headline="How It Works"]
+
+::steps[headline="Three Steps"]
+1. **Describe** — Tell the AI what you want
+2. **Generate** — SurfDoc spec + surf-parse builds it
+3. **Ship** — Live on your domain instantly
+::
+
+::
+
+::features[headline="Why SurfDoc"]
+
+### Typed Blocks
+37 semantic block types — callouts, decisions, data, metrics, layouts, landing pages.
+
+### Graceful Degradation
+Every `.surf` file is readable as plain markdown. No lock-in.
+
+### AI-Native
+Designed for AI agents to read, write, and modify without special tooling.
+
+::
+
+::comparison[headline="SurfDoc vs Markdown"]
+
+| Feature | SurfDoc | Markdown |
+|---------|---------|----------|
+| Typed blocks | Yes | No |
+| Structured data | Yes | No |
+| Web generation | Yes | No |
+| Graceful degradation | Yes | N/A |
+
+::
+
+::testimonial[author="Brady Davis" role="Founder" company="CloudSurf"]
+Documents are the primitive. Applications are optional.
+::
+
+::faq
+
+:::details[title="What is SurfDoc?"]
+A typed document format — markdown superset with structured blocks, data, and layout.
+:::
+
+:::details[title="Is it open source?"]
+Yes. surf-parse is MIT licensed on GitHub.
+:::
+
+::
+
+::pricing-table
+
+:::column
+### Free
+**$0**/mo
+- 1 site
+- Contact form
+- Subdomain
+::cta[label="Start Free" href="/signup"]
+:::
+
+:::column
+### Pro
+**$12**/mo
+- Unlimited sites
+- Custom domain
+- Visitor chat
+- Google Ads
+::cta[label="Upgrade" href="/upgrade" primary]
+:::
+
+::
+
+## Other Blocks
+
+::quote[author="Alan Kay" source="OOPSLA 1997"]
+The best way to predict the future is to invent it.
+::
+
+::figure[src="icons/surf-file.svg" alt="SurfDoc logo" caption="The SurfDoc mark"]
+
+::embed[src="README.md" mode=preview]
+
+::timeline
+- **2025-08**: surf-parse v0.1
+- **2026-01**: SurfDoc trademark filed
+- **2026-02**: VS Code extension shipped
+::
+
+::testimonial[author="Name" role="Role" company="Company"]
+Testimonial text
+::
+
+
+::tasks
+- [x] TextMate grammar
+- [x] Snippets for all block types
+- [x] Language configuration
+- [ ] Preview panel (future)
+- [ ] Diagnostics/linting (future)
+::
+
+::turn[participant=user timestamp=2026-02-22]
+Can you build a VS Code extension for SurfDoc?
+::
+
+::turn[participant=assistant timestamp=2026-02-22]
+Done. 49 snippets, full grammar, file icons.
+::
+
+## Inline Extensions
+
+The extension is :status[done] and ready for testing.
+
+See :ref[plans/strategy/2026-02-10-surfdoc-format-specification.surf] for the full spec.
+
+Based on :evidence[614 tests passing in wavesite-4 as of 2026-02-22].
+
+---
+
+::footer
+CloudSurf Software LLC | doc.surf | cloudsurf.com
+::

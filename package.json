@@ -1,0 +1,60 @@
+{
+  "name": "surfdoc",
+  "displayName": "SurfDoc",
+  "description": "Language support for SurfDoc (.surf) — syntax highlighting, snippets, and editor features for CloudSurf's typed document format.",
+  "version": "0.1.0",
+  "publisher": "cloudsurf-software",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cloudsurf-software/surfdoc-vscode"
+  },
+  "engines": {
+    "vscode": "^1.78.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "surfdoc",
+    "surf",
+    "markdown",
+    "documentation",
+    "cloudsurf"
+  ],
+  "icon": "icons/surf-file.png",
+  "contributes": {
+    "languages": [
+      {
+        "id": "surfdoc",
+        "aliases": [
+          "SurfDoc",
+          "surfdoc",
+          "surf"
+        ],
+        "extensions": [
+          ".surf"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/surf-file-light.png",
+          "dark": "./icons/surf-file-dark.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "surfdoc",
+        "scopeName": "text.html.markdown.surf",
+        "path": "./syntaxes/surf.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "surfdoc",
+        "path": "./snippets/surfdoc.json"
+      }
+    ]
+  }
+}
