@@ -3,7 +3,7 @@
   "displayName": "SurfDoc",
   "description": "Language support for SurfDoc (.surf) — syntax highlighting, snippets, and editor features for CloudSurf's typed document format.",
   "version": "0.1.0",
-  "publisher": "cloudsurf-software",
+  "publisher": "CloudSurf",
   "license": "MIT",
   "repository": {
     "type": "git",
